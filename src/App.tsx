@@ -9,6 +9,7 @@ import { ProjectData } from "./types";
 import styled from "styled-components";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
+import { FaFilePdf } from "@react-icons/all-files/fa/FaFilePdf";
 import { FaMapMarkerAlt } from "@react-icons/all-files/fa/FaMapMarkerAlt";
 import { FaEnvelope } from "@react-icons/all-files/fa/FaEnvelope";
 import { FaSkype } from "@react-icons/all-files/fa/FaSkype";
@@ -16,6 +17,7 @@ import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
 import Theme from "./components/Theme";
 import ProjectCard from "./components/ProjectCard";
 import SortByYear from "./components/SortByYear";
+import Button from "./components/Button";
 
 const allProjectData: ProjectData[] = [
   {
@@ -366,13 +368,13 @@ const Header = styled.h1`
   text-align: center;
   margin-bottom: 10px;
   padding: 20px 0 0;
-  color: ${(props) => props.theme.color}; // Use theme color
+  color: ${(props) => props.theme.color};
 `;
 
 const ProjectCount = styled.p`
   text-align: center;
   font-size: 1.1rem;
-  color: ${(props) => props.theme.color}; // Use theme color
+  color: ${(props) => props.theme.color};
   margin-bottom: 20px;
 `;
 
@@ -395,11 +397,11 @@ const ContactChip = styled.a`
   // color: #333;
   font-size: 0.9rem;
   transition: background-color 0.3s ease;
-  background-color: ${(props) => props.theme.chipBackground}; // Use theme color
-  color: ${(props) => props.theme.color}; // Use theme color
+  background-color: ${(props) => props.theme.chipBackground};
+  color: ${(props) => props.theme.color};
 
   &:hover {
-    background-color: ${(props) => props.theme.chipHover}; // Use theme color
+    background-color: ${(props) => props.theme.chipHover};
   }
 
   svg {
@@ -569,7 +571,9 @@ const App: React.FC = () => {
       <Container>
         {" "}
         <div ref={inputRef}>
-          <button onClick={downloadPDF}>Download Portfolio PDF</button>
+          <Button label="Download PDF" onClick={downloadPDF}>
+            <FaFilePdf /> {/* Add the icon */}
+          </Button>
           {/* <HeaderContainer className={isSticky ? "sticky" : ""}> */}
           <HeaderContainer>
             <Header>Sindhuja Govindarajan</Header>
