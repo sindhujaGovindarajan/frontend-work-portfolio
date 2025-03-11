@@ -1,6 +1,14 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
 import { ProjectData } from "./types";
 import styled from "styled-components";
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
 import { FaMapMarkerAlt } from "@react-icons/all-files/fa/FaMapMarkerAlt";
 import { FaEnvelope } from "@react-icons/all-files/fa/FaEnvelope";
 import { FaSkype } from "@react-icons/all-files/fa/FaSkype";
@@ -432,6 +440,22 @@ const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState<string>("all");
   const [isSticky, setIsSticky] = useState(false);
+  const inputRef = useRef<HTMLDivElement>(null);
+
+  const downloadPDF = async () => {
+    if (inputRef.current) {
+      const canvas = await html2canvas(inputRef.current);
+      const imgData = canvas.toDataURL("image/png");
+
+      const pdf = new jsPDF();
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save("Portfolio: Sindhuja Govindarajan.pdf");
+    }
+  };
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
@@ -541,56 +565,61 @@ const App: React.FC = () => {
 
   return (
     <Theme>
+      {/* Wrap around the content to capture */}
       <Container>
-        {/* <HeaderContainer className={isSticky ? "sticky" : ""}> */}
-        <HeaderContainer>
-          <Header>Sindhuja Govindarajan</Header>
-        </HeaderContainer>
-        <ContactContainer>
-          <ContactChip>
-            <FaMapMarkerAlt />
-            <span>Toronto, ON, Canada</span>
-          </ContactChip>
-          <ContactChip href="mailto:srin2258@gmail.com">
-            <FaEnvelope />
-            <span>srin2258@gmail.com</span>
-          </ContactChip>
-          <ContactChip
-            href="https://join.skype.com/invite/ramwPDviUtLf"
-            target="_blank"
-          >
-            <FaSkype />
-            <span>My Skype</span>
-          </ContactChip>
-          <ContactChip
-            href="https://www.linkedin.com/in/sindhujagovindarajan/"
-            target="_blank"
-          >
-            <FaLinkedin />
-            <span>My LinkedIn</span>
-          </ContactChip>
-        </ContactContainer>
-        <ProjectCount>
-          {filteredProjects.length < allProjectData.length &&
-            `${filteredProjects.length} of `}{" "}
-          {allProjectData.length} projects
-        </ProjectCount>{" "}
-        <FilterContainer>
-          <SortByYear sortBy={sortBy} setSortBy={setSortBy} />
-          <SearchInput
-            type="text"
-            placeholder="Search projects..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-        </FilterContainer>
-        <MasonryGrid>
-          {filteredProjects.map((project, index) => (
-            <MasonryItem key={index}>
-              <ProjectCard {...project} searchTerm={searchTerm} />
-            </MasonryItem>
-          ))}
-        </MasonryGrid>
+        {" "}
+        <div ref={inputRef}>
+          <button onClick={downloadPDF}>Download Portfolio PDF</button>
+          {/* <HeaderContainer className={isSticky ? "sticky" : ""}> */}
+          <HeaderContainer>
+            <Header>Sindhuja Govindarajan</Header>
+          </HeaderContainer>
+          <ContactContainer>
+            <ContactChip>
+              <FaMapMarkerAlt />
+              <span>Toronto, ON, Canada</span>
+            </ContactChip>
+            <ContactChip href="mailto:srin2258@gmail.com">
+              <FaEnvelope />
+              <span>srin2258@gmail.com</span>
+            </ContactChip>
+            <ContactChip
+              href="https://join.skype.com/invite/ramwPDviUtLf"
+              target="_blank"
+            >
+              <FaSkype />
+              <span>My Skype</span>
+            </ContactChip>
+            <ContactChip
+              href="https://www.linkedin.com/in/sindhujagovindarajan/"
+              target="_blank"
+            >
+              <FaLinkedin />
+              <span>My LinkedIn</span>
+            </ContactChip>
+          </ContactContainer>
+          <ProjectCount>
+            {filteredProjects.length < allProjectData.length &&
+              `${filteredProjects.length} of `}{" "}
+            {allProjectData.length} projects
+          </ProjectCount>{" "}
+          <FilterContainer>
+            <SortByYear sortBy={sortBy} setSortBy={setSortBy} />
+            <SearchInput
+              type="text"
+              placeholder="Search projects..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+          </FilterContainer>
+          <MasonryGrid>
+            {filteredProjects.map((project, index) => (
+              <MasonryItem key={index}>
+                <ProjectCard {...project} searchTerm={searchTerm} />
+              </MasonryItem>
+            ))}
+          </MasonryGrid>
+        </div>
       </Container>
     </Theme>
   );
