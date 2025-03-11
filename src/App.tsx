@@ -14,6 +14,7 @@ import { FaMapMarkerAlt } from "@react-icons/all-files/fa/FaMapMarkerAlt";
 import { FaEnvelope } from "@react-icons/all-files/fa/FaEnvelope";
 import { FaSkype } from "@react-icons/all-files/fa/FaSkype";
 import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
+import { FaArrowUp } from "@react-icons/all-files/fa/FaArrowUp";
 import Theme from "./components/Theme";
 import ProjectCard from "./components/ProjectCard";
 import SortByYear from "./components/SortByYear";
@@ -389,12 +390,10 @@ const ContactContainer = styled.div`
 const ContactChip = styled.a`
   display: flex;
   align-items: center;
-  // background-color: #d4efdf; // Light green pastel color
   padding: 8px 12px;
   margin: 5px;
   border-radius: 20px;
   text-decoration: none;
-  // color: #333;
   font-size: 0.9rem;
   transition: background-color 0.3s ease;
   background-color: ${(props) => props.theme.chipBackground};
@@ -439,6 +438,25 @@ const MasonryItem = styled.div`
   grid-row: span 1;
 `;
 
+const ScrollToTopButton = styled.button`
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: ${(props) => props.theme.secondary.blue};
+  color: white;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+
+  &.show {
+    opacity: 1;
+  }
+`;
+
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState<string>("all");
@@ -466,6 +484,12 @@ const App: React.FC = () => {
     } else {
       setIsSticky(false);
     }
+  };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
   const handleSearchChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -625,6 +649,12 @@ const App: React.FC = () => {
             ))}
           </MasonryGrid>
         </div>
+        <ScrollToTopButton
+          onClick={scrollToTop}
+          className={isSticky ? "show" : ""} // Conditionally show the button
+        >
+          <FaArrowUp />
+        </ScrollToTopButton>
       </Container>
     </Theme>
   );
