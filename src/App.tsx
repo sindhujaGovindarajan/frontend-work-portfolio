@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import ProjectCard from "./components/ProjectCard";
 import styled from "styled-components";
 import { FaMapMarkerAlt } from "@react-icons/all-files/fa/FaMapMarkerAlt";
@@ -337,8 +337,25 @@ const allProjectData: ProjectData[] = [
 const Container = styled.div`
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 20px;
-  max-width: 1200px;
+  max-width: 100vw;
   margin: 0 auto;
+`;
+
+const HeaderContainer = styled.div`
+  position: sticky;
+  top: 0;
+  left: 0;
+  // width: 100vw;
+  background-color: white;
+  z-index: 10;
+  padding-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0); // Initial box-shadow: none
+  transition: box-shadow 0.3s ease; // Add transition for box-shadow
+
+  &.sticky {
+    // Apply styles when sticky is active
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Add box-shadow
+  }
 `;
 
 const Header = styled.h1`
@@ -415,7 +432,15 @@ const MasonryItem = styled.div`
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [isSticky, setIsSticky] = useState(false);
 
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      setIsSticky(true);
+    } else {
+      setIsSticky(false);
+    }
+  };
   const handleSearchChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setSearchTerm(e.target.value);
@@ -443,9 +468,19 @@ const App: React.FC = () => {
     });
   }, [searchTerm]);
 
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <Container>
-      <Header>Sindhuja Govindarajan</Header>
+      {/* <HeaderContainer className={isSticky ? "sticky" : ""}> */}
+      <HeaderContainer>
+        <Header>Sindhuja Govindarajan</Header>
+      </HeaderContainer>
       <ContactContainer>
         <ContactChip>
           <FaMapMarkerAlt />
