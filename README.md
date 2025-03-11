@@ -30,11 +30,7 @@ This is a React application that displays a portfolio of projects in an interact
 
 - **Project Data:** Update the `allProjectData` array in `App.tsx` with your own project details.
 - **Styling:** Modify the styled-components in `App.tsx` and `projectCard.tsx` to customize the appearance of the application.
-- **Color Themes:** Adjust the `getRandomPastelColor` function in `App.tsx` to generate different color palettes.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit pull requests for bug fixes, feature enhancements, or any other improvements.
+<!-- - **Color Themes:** Adjust the `getRandomPastelColor` function in `App.tsx` to generate different color palettes. -->
 
 ## License
 

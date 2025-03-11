@@ -26,8 +26,7 @@ const Card = styled.div<{ expanded: boolean }>`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease, max-height 0.3s ease;
   overflow: hidden;
-  max-height: ${(props) =>
-    props.expanded ? "1000px" : "auto"}; /* Remove rigid height */
+  max-height: "auto"; /* Remove rigid height */
   cursor: pointer;
 `;
 

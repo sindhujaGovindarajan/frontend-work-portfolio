@@ -1,6 +1,10 @@
 import React, { useState, useMemo, useCallback } from "react";
 import ProjectCard from "./components/ProjectCard";
 import styled from "styled-components";
+import { FaMapMarkerAlt } from "@react-icons/all-files/fa/FaMapMarkerAlt";
+import { FaEnvelope } from "@react-icons/all-files/fa/FaEnvelope";
+import { FaSkype } from "@react-icons/all-files/fa/FaSkype";
+import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
 
 interface ProjectData {
   title: string;
@@ -350,6 +354,35 @@ const ProjectCount = styled.p`
   margin-bottom: 20px;
 `;
 
+const ContactContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap; // Allow wrapping for smaller screens
+`;
+
+const ContactChip = styled.a`
+  display: flex;
+  align-items: center;
+  background-color: #d4efdf; // Light green pastel color
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: #333;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #aed6b8; // Slightly darker green on hover
+  }
+
+  svg {
+    margin-right: 5px; // Add space between icon and text
+  }
+`;
+
 const SearchContainer = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -412,7 +445,31 @@ const App: React.FC = () => {
 
   return (
     <Container>
-      <Header>Projects Portfolio</Header>
+      <Header>Sindhuja Govindarajan</Header>
+      <ContactContainer>
+        <ContactChip>
+          <FaMapMarkerAlt />
+          <span>Toronto, ON, Canada</span>
+        </ContactChip>
+        <ContactChip href="mailto:srin2258@gmail.com">
+          <FaEnvelope />
+          <span>srin2258@gmail.com</span>
+        </ContactChip>
+        <ContactChip
+          href="https://join.skype.com/invite/ramwPDviUtLf"
+          target="_blank"
+        >
+          <FaSkype />
+          <span>My Skype</span>
+        </ContactChip>
+        <ContactChip
+          href="https://www.linkedin.com/in/sindhujagovindarajan/"
+          target="_blank"
+        >
+          <FaLinkedin />
+          <span>My LinkedIn</span>
+        </ContactChip>
+      </ContactContainer>
       <ProjectCount>{allProjectData.length} projects</ProjectCount>{" "}
       <SearchContainer>
         <SearchInput
