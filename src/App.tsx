@@ -1,19 +1,13 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
-import ProjectCard from "./components/ProjectCard";
+import { ProjectData } from "./types";
 import styled from "styled-components";
 import { FaMapMarkerAlt } from "@react-icons/all-files/fa/FaMapMarkerAlt";
 import { FaEnvelope } from "@react-icons/all-files/fa/FaEnvelope";
 import { FaSkype } from "@react-icons/all-files/fa/FaSkype";
 import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
 import Theme from "./components/Theme";
-
-interface ProjectData {
-  title: string;
-  tenure: string;
-  responsibilities: string[];
-  techStackUsed: string[];
-  employerName: string;
-}
+import ProjectCard from "./components/ProjectCard";
+import SortByYear from "./components/SortByYear";
 
 const allProjectData: ProjectData[] = [
   {
@@ -404,19 +398,18 @@ const ContactChip = styled.a`
   }
 `;
 
-const SearchContainer = styled.div`
+const FilterContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
   margin-bottom: 20px;
 `;
 
 const SearchInput = styled.input`
-  padding: 10px 16px;
-  width: 100%;
-  max-width: 400px;
+  padding: 10px 15px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 1rem;
+  margin-left: 10px;
+  flex-grow: 1; // Allow input to expand and fill remaining space
 `;
 
 const MasonryGrid = styled.div`
@@ -436,6 +429,7 @@ const MasonryItem = styled.div`
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState<string>("all");
   const [isSticky, setIsSticky] = useState(false);
 
   const handleScroll = () => {
@@ -454,23 +448,88 @@ const App: React.FC = () => {
 
   const filteredProjects = useMemo(() => {
     const lowerSearchTerm = searchTerm.toLowerCase();
-    if (!lowerSearchTerm) {
-      return allProjectData;
+    let filtered = allProjectData;
+
+    if (lowerSearchTerm) {
+      filtered = filtered.filter((project) => {
+        return (
+          project.title.toLowerCase().includes(lowerSearchTerm) ||
+          project.employerName.toLowerCase().includes(lowerSearchTerm) ||
+          project.techStackUsed.some((tech) =>
+            tech.toLowerCase().includes(lowerSearchTerm)
+          ) ||
+          project.responsibilities.some((resp) =>
+            resp.toLowerCase().includes(lowerSearchTerm)
+          )
+        );
+      });
     }
 
-    return allProjectData.filter((project) => {
-      return (
-        project.title.toLowerCase().includes(lowerSearchTerm) ||
-        project.employerName.toLowerCase().includes(lowerSearchTerm) ||
-        project.techStackUsed.some((tech) =>
-          tech.toLowerCase().includes(lowerSearchTerm)
-        ) ||
-        project.responsibilities.some((resp) =>
-          resp.toLowerCase().includes(lowerSearchTerm)
-        )
-      );
-    });
-  }, [searchTerm]);
+    // Sorting logic
+    if (sortBy !== "all") {
+      const currentDate = new Date();
+      let filterDate: Date;
+
+      if (sortBy === "lastMonth") {
+        filterDate = new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth() - 1,
+          currentDate.getDate()
+        );
+      } else if (sortBy === "last6Months") {
+        filterDate = new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth() - 6,
+          currentDate.getDate()
+        );
+      } else if (sortBy === "lastYear") {
+        filterDate = new Date(
+          currentDate.getFullYear() - 1,
+          currentDate.getMonth(),
+          currentDate.getDate()
+        );
+      } else if (sortBy === "last2Years") {
+        filterDate = new Date(
+          currentDate.getFullYear() - 2,
+          currentDate.getMonth(),
+          currentDate.getDate()
+        );
+      } else if (sortBy === "olderThan2Years") {
+        filterDate = new Date(
+          currentDate.getFullYear() - 2,
+          currentDate.getMonth(),
+          currentDate.getDate()
+        );
+      } else {
+        // This shouldn't happen, but handle it just in case
+        return filtered;
+      }
+
+      filtered = filtered.filter((project) => {
+        // Extract start and end years from tenure
+        const [startDate, endDate] = project.tenure
+          .split(" – ")
+          .map((dateStr) => {
+            const [month, year] = dateStr.trim().split(" ");
+            return new Date(
+              parseInt(year, 10),
+              new Date(`${month} 1`).getMonth(),
+              1
+            );
+          });
+
+        if (sortBy === "olderThan2Years") {
+          // For "olderThan2Years", check if the end date is older than 2 years
+          return endDate && endDate < filterDate;
+        } else {
+          // For other options, check if either start or end date is within the filter range
+          return startDate >= filterDate || (endDate && endDate >= filterDate);
+        }
+      });
+    }
+
+    return filtered;
+  }, [searchTerm, sortBy]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -511,14 +570,15 @@ const App: React.FC = () => {
           </ContactChip>
         </ContactContainer>
         <ProjectCount>{allProjectData.length} projects</ProjectCount>{" "}
-        <SearchContainer>
+        <FilterContainer>
+          <SortByYear sortBy={sortBy} setSortBy={setSortBy} />
           <SearchInput
             type="text"
             placeholder="Search projects..."
             value={searchTerm}
             onChange={handleSearchChange}
           />
-        </SearchContainer>
+        </FilterContainer>
         <MasonryGrid>
           {filteredProjects.map((project, index) => (
             <MasonryItem key={index}>
