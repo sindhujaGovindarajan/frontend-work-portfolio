@@ -332,7 +332,7 @@ const allProjectData: ProjectData[] = [
 
 const Container = styled.div`
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  padding: 20px;
+  padding-bottom: 20px;
   max-width: 1200px;
   margin: 0 auto;
 `;
@@ -356,7 +356,8 @@ const HeaderContainer = styled.div`
 
 const Header = styled.h1`
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  padding: 20px 0 0;
   color: ${(props) => props.theme.color}; // Use theme color
 `;
 
