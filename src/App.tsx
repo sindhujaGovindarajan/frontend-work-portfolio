@@ -5,6 +5,7 @@ import { FaMapMarkerAlt } from "@react-icons/all-files/fa/FaMapMarkerAlt";
 import { FaEnvelope } from "@react-icons/all-files/fa/FaEnvelope";
 import { FaSkype } from "@react-icons/all-files/fa/FaSkype";
 import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
+import Theme from "./components/Theme";
 
 interface ProjectData {
   title: string;
@@ -334,10 +335,11 @@ const allProjectData: ProjectData[] = [
     employerName: "Odyssey Technologies Limited, Chennai, Tamil Nadu",
   },
 ];
+
 const Container = styled.div`
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 20px;
-  max-width: 100vw;
+  max-width: 1200px;
   margin: 0 auto;
 `;
 
@@ -361,13 +363,13 @@ const HeaderContainer = styled.div`
 const Header = styled.h1`
   text-align: center;
   margin-bottom: 20px;
-  color: #333;
+  color: ${(props) => props.theme.color}; // Use theme color
 `;
 
 const ProjectCount = styled.p`
   text-align: center;
   font-size: 1.1rem;
-  color: #555;
+  color: ${(props) => props.theme.color}; // Use theme color
   margin-bottom: 20px;
 `;
 
@@ -382,17 +384,19 @@ const ContactContainer = styled.div`
 const ContactChip = styled.a`
   display: flex;
   align-items: center;
-  background-color: #d4efdf; // Light green pastel color
+  // background-color: #d4efdf; // Light green pastel color
   padding: 8px 12px;
   margin: 5px;
   border-radius: 20px;
   text-decoration: none;
-  color: #333;
+  // color: #333;
   font-size: 0.9rem;
   transition: background-color 0.3s ease;
+  background-color: ${(props) => props.theme.chipBackground}; // Use theme color
+  color: ${(props) => props.theme.color}; // Use theme color
 
   &:hover {
-    background-color: #aed6b8; // Slightly darker green on hover
+    background-color: ${(props) => props.theme.chipHover}; // Use theme color
   }
 
   svg {
@@ -476,52 +480,54 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <Container>
-      {/* <HeaderContainer className={isSticky ? "sticky" : ""}> */}
-      <HeaderContainer>
-        <Header>Sindhuja Govindarajan</Header>
-      </HeaderContainer>
-      <ContactContainer>
-        <ContactChip>
-          <FaMapMarkerAlt />
-          <span>Toronto, ON, Canada</span>
-        </ContactChip>
-        <ContactChip href="mailto:srin2258@gmail.com">
-          <FaEnvelope />
-          <span>srin2258@gmail.com</span>
-        </ContactChip>
-        <ContactChip
-          href="https://join.skype.com/invite/ramwPDviUtLf"
-          target="_blank"
-        >
-          <FaSkype />
-          <span>My Skype</span>
-        </ContactChip>
-        <ContactChip
-          href="https://www.linkedin.com/in/sindhujagovindarajan/"
-          target="_blank"
-        >
-          <FaLinkedin />
-          <span>My LinkedIn</span>
-        </ContactChip>
-      </ContactContainer>
-      <ProjectCount>{allProjectData.length} projects</ProjectCount>{" "}
-      <SearchContainer>
-        <SearchInput
-          type="text"
-          placeholder="Search projects..."
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
-      </SearchContainer>
-      <MasonryGrid>
-        {filteredProjects.map((project, index) => (
-          <MasonryItem key={index}>
-            <ProjectCard {...project} searchTerm={searchTerm} />
-          </MasonryItem>
-        ))}
-      </MasonryGrid>
-    </Container>
+    <Theme>
+      <Container>
+        {/* <HeaderContainer className={isSticky ? "sticky" : ""}> */}
+        <HeaderContainer>
+          <Header>Sindhuja Govindarajan</Header>
+        </HeaderContainer>
+        <ContactContainer>
+          <ContactChip>
+            <FaMapMarkerAlt />
+            <span>Toronto, ON, Canada</span>
+          </ContactChip>
+          <ContactChip href="mailto:srin2258@gmail.com">
+            <FaEnvelope />
+            <span>srin2258@gmail.com</span>
+          </ContactChip>
+          <ContactChip
+            href="https://join.skype.com/invite/ramwPDviUtLf"
+            target="_blank"
+          >
+            <FaSkype />
+            <span>My Skype</span>
+          </ContactChip>
+          <ContactChip
+            href="https://www.linkedin.com/in/sindhujagovindarajan/"
+            target="_blank"
+          >
+            <FaLinkedin />
+            <span>My LinkedIn</span>
+          </ContactChip>
+        </ContactContainer>
+        <ProjectCount>{allProjectData.length} projects</ProjectCount>{" "}
+        <SearchContainer>
+          <SearchInput
+            type="text"
+            placeholder="Search projects..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+        </SearchContainer>
+        <MasonryGrid>
+          {filteredProjects.map((project, index) => (
+            <MasonryItem key={index}>
+              <ProjectCard {...project} searchTerm={searchTerm} />
+            </MasonryItem>
+          ))}
+        </MasonryGrid>
+      </Container>
+    </Theme>
   );
 };
 
