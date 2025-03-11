@@ -27,7 +27,7 @@ const lightTheme = {
   cardColor: "#333",
   chipBackground: "#d4efdf",
   chipHover: "#aed6b8",
-  secondary: { blue: "#338bff", lightBlue: "#669cff" },
+  secondary: { blue: "#338bff", lightBlue: "#449cff" },
 };
 
 const darkTheme = {

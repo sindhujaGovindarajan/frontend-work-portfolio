@@ -9,7 +9,7 @@ import { ProjectData } from "./types";
 import styled from "styled-components";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-import { FaFilePdf } from "@react-icons/all-files/fa/FaFilePdf";
+import { FaFileDownload } from "@react-icons/all-files/fa/FaFileDownload";
 import { FaMapMarkerAlt } from "@react-icons/all-files/fa/FaMapMarkerAlt";
 import { FaEnvelope } from "@react-icons/all-files/fa/FaEnvelope";
 import { FaSkype } from "@react-icons/all-files/fa/FaSkype";
@@ -413,6 +413,7 @@ const FilterContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  column-gap: 10px;
 `;
 
 const SearchInput = styled.input`
@@ -571,9 +572,6 @@ const App: React.FC = () => {
       <Container>
         {" "}
         <div ref={inputRef}>
-          <Button label="Download PDF" onClick={downloadPDF}>
-            <FaFilePdf /> {/* Add the icon */}
-          </Button>
           {/* <HeaderContainer className={isSticky ? "sticky" : ""}> */}
           <HeaderContainer>
             <Header>Sindhuja Govindarajan</Header>
@@ -601,6 +599,9 @@ const App: React.FC = () => {
               <FaLinkedin />
               <span>My LinkedIn</span>
             </ContactChip>
+            <Button label="Portfolio" onClick={downloadPDF} title="Download">
+              <FaFileDownload />
+            </Button>
           </ContactContainer>
           <ProjectCount>
             {filteredProjects.length < allProjectData.length &&

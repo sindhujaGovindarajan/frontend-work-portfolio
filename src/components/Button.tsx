@@ -1,23 +1,29 @@
 import React from "react";
 import styled from "styled-components";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   onClick: () => void;
   children?: React.ReactNode;
 }
 
 const StyledButton = styled.button`
-  /* Add your button styles here */
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  color: ${(props) => props.theme.secondary.blue};
-  background-color: white;
-  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 20px;
+  border: none;
+  text-decoration: none;
+  color: white;
+  font-size: 0.9rem;
+  background-color: ${(props) => props.theme.secondary.lightBlue};
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: ${(props) => props.theme.secondary.blue};
+  }
 
   svg {
     margin-right: 5px;
