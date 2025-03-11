@@ -332,7 +332,7 @@ const allProjectData: ProjectData[] = [
 
 const Container = styled.div`
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  padding-bottom: 20px;
+  padding-bottom: 20;
   max-width: 1200px;
   margin: 0 auto;
 `;
@@ -570,7 +570,11 @@ const App: React.FC = () => {
             <span>My LinkedIn</span>
           </ContactChip>
         </ContactContainer>
-        <ProjectCount>{allProjectData.length} projects</ProjectCount>{" "}
+        <ProjectCount>
+          {filteredProjects.length < allProjectData.length &&
+            `${filteredProjects.length} of `}{" "}
+          {allProjectData.length} projects
+        </ProjectCount>{" "}
         <FilterContainer>
           <SortByYear sortBy={sortBy} setSortBy={setSortBy} />
           <SearchInput
