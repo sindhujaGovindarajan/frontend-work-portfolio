@@ -5,8 +5,8 @@ const ComingSoonContainer = styled.div`
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: #f0ad4e;
-  color: white;
+  background-color: ${(props) => props.theme.secondary.main};
+  color: ${(props) => props.theme.primary.main};
   padding: 5px 10px;
   border-radius: 4px;
   font-size: 0.9rem;
