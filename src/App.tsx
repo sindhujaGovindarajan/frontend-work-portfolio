@@ -624,9 +624,9 @@ const App: React.FC = () => {
               <FaLinkedin />
               <span>My LinkedIn</span>
             </ContactChip>
-            <Button label="Portfolio" onClick={downloadPDF} title="Download">
+            {/* <Button label="Portfolio" onClick={downloadPDF} title="Download">
               <FaFileDownload />
-            </Button>
+            </Button> */}
           </ContactContainer>
           <ProjectCount>
             {filteredProjects.length < allProjectData.length &&
