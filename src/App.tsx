@@ -19,6 +19,7 @@ import Theme from "./components/Theme";
 import ProjectCard from "./components/ProjectCard";
 import SortByYear from "./components/SortByYear";
 import Button from "./components/Button";
+import ComingSoon from "./components/ComingSoon";
 
 const allProjectData: ProjectData[] = [
   {
@@ -594,7 +595,7 @@ const App: React.FC = () => {
     <Theme>
       {/* Wrap around the content to capture */}
       <Container>
-        {" "}
+        <ComingSoon message="Stay Tuned! New Site Launching Soon..." />
         <div ref={inputRef}>
           {/* <HeaderContainer className={isSticky ? "sticky" : ""}> */}
           <HeaderContainer>
