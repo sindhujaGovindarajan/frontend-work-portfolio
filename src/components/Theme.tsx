@@ -25,10 +25,18 @@ const lightTheme = {
   color: "#333",
   cardBackground: "#fff",
   cardColor: "#333",
-  chipBackground: "#d4efdf",
-  chipHover: "#aed6b8",
-  secondary: { blue: "#338bff", lightBlue: "#449cff" },
+  chipBackground: "",
+  chipHover: "",
+  primary: {
+    main: "#31D93C",
+    light: "#31D93C55",
+    lighter: "#31D93C88",
+    lightest: "#31D93C99",
+  },
+  secondary: { main: "#5831D9", bitLight: "#5831D999", light: "#5831D933" },
 };
+lightTheme.chipBackground = lightTheme.primary.light;
+lightTheme.chipHover = lightTheme.primary.lighter;
 
 const darkTheme = {
   background: "#333",

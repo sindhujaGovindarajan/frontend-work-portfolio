@@ -17,12 +17,12 @@ const StyledButton = styled.button`
   text-decoration: none;
   color: white;
   font-size: 0.9rem;
-  background-color: ${(props) => props.theme.secondary.lightBlue};
+  background-color: ${(props) => props.theme.secondary.light};
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${(props) => props.theme.secondary.blue};
+    background-color: ${(props) => props.theme.secondary.main};
   }
 
   svg {

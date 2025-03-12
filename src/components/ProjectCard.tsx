@@ -65,7 +65,7 @@ const TechChip = styled.span`
   padding: 4px 8px;
   margin: 2px;
   border-radius: 12px;
-  color: ${(props) => props.theme.secondary.blue};
+  color: ${(props) => props.theme.secondary.main};
   font-size: 0.8rem;
 `;
 
