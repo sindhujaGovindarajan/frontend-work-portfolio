@@ -20,21 +20,22 @@ import ProjectCard from "./components/ProjectCard";
 import SortByYear from "./components/SortByYear";
 import Button from "./components/Button";
 import ComingSoon from "./components/ComingSoon";
+import SvgSiteLogo from "./assets/SvgSiteLogo";
 
 const allProjectData: ProjectData[] = [
-  {
-    title: "Northwestern Mutual, India",
-    tenure: "Jun 2024 – Jul 2024",
-    responsibilities: [
-      "Architecting and defining the Front-end framework to solve complex designs and interactions.",
-      "Discussing with microservices team and consume the integration modules using Web Services API.",
-    ],
-    techStackUsed: ["React Js", "Redux", "RTL"],
-    employerName: "HCL Technologies Ltd, Chennai, Tamil Nadu",
-  },
+  // {
+  //   title: "Northwestern Mutual",
+  //   tenure: "Jun 2024 - Jul 2024",
+  //   responsibilities: [
+  //     "Architecting and defining the Front-end framework to solve complex designs and interactions.",
+  //     "Discussing with microservices team and consume the integration modules using Web Services API.",
+  //   ],
+  //   techStackUsed: ["React Js", "Redux", "RTL"],
+  //   employerName: "HCL Technologies Ltd, Chennai, Tamil Nadu",
+  // },
   {
     title: "Applied Materials Canada Inc.",
-    tenure: "Jul 2021 – Feb 2024",
+    tenure: "Jul 2021 - Present",
     responsibilities: [
       "Architecting and defining the Front-end framework to solve complex designs and interactions.",
       "Discussing with microservices team and consume the integration modules using Web Services API.",
@@ -77,8 +78,8 @@ const allProjectData: ProjectData[] = [
     employerName: "HCL Canada Inc., Toronto, Canada",
   },
   {
-    title: "Hootsuite – Amplify MS-Teams App",
-    tenure: "Feb 2021 – May 2021",
+    title: "Hootsuite - Amplify MS-Teams App",
+    tenure: "Feb 2021 - May 2021",
     responsibilities: [
       "Developing technical solution and fully functional interface for Hootsuite’s employees and clients to safely share content—extending social reach.",
       "Proactively communicate with client and off-shore teams on a daily-basis and requirement gathering focusing on delivering customer value.",
@@ -105,7 +106,7 @@ const allProjectData: ProjectData[] = [
   },
   {
     title: "Broadcom Avago",
-    tenure: "May 2020 – Jan 2021",
+    tenure: "May 2020 - Jan 2021",
     responsibilities: [
       "Developing technical solution and fully functional interface for Broadcom’s Licensing and Product Usage.",
       "Proactively communicate with client and off-shore teams on a daily-basis and requirement gathering focusing on delivering customer value.",
@@ -240,7 +241,7 @@ const allProjectData: ProjectData[] = [
   },
   {
     title: "Argus (internal HRA product)",
-    tenure: "Jun 2015 – Sep 2019",
+    tenure: "Jun 2015 - Sep 2019",
     responsibilities: [
       "Responsible for the entire UI planning, construction and front-end development of an internal product for Employees’ Record management, Human Resources Information Systems (HRIS), Organizational development logs, Enterprise Resource Planning, Event Registration & Accounting.",
       "Responsible for UI integration with back-end APIs.",
@@ -258,7 +259,7 @@ const allProjectData: ProjectData[] = [
   },
   {
     title: "Thunderbird mail client extension",
-    tenure: "Jan 2018 to Sep 2018",
+    tenure: "Jan 2018 - Sep 2018",
     responsibilities: [
       "To encrypt mails for security, researched on and developed POCs.",
       "Developed Thunderbird mail client extension to digitally encrypt, sign mails and verify mails’ signature using JavaScript and XUL.",
@@ -268,7 +269,7 @@ const allProjectData: ProjectData[] = [
   },
   {
     title: "Clocktix, Certrust (Time Stamping Server products)",
-    tenure: "July 2017 to Dec 2017",
+    tenure: "July 2017 - Dec 2017",
     responsibilities: [
       "Write standard-based markup and CSS, foster collaboration between engineering & design teams.",
       "Help team to create and maintain a style guide for UI components and responsive front-end markup.",
@@ -288,7 +289,7 @@ const allProjectData: ProjectData[] = [
   },
   {
     title: "Epic (data aggregation product)",
-    tenure: "Feb 2017 to July 2017",
+    tenure: "Feb 2017 - July 2017",
     responsibilities: [
       "Maintain existing code and provided feature enhancements as per customer requirements bridging between multiple teams.",
       "Debug, deconstruct and resolve programmatic issues reported live.",
@@ -310,7 +311,7 @@ const allProjectData: ProjectData[] = [
   },
   {
     title: "Certrix (Digital Certification Authority product)",
-    tenure: "Aug 2015 to Jan 2017",
+    tenure: "Aug 2015 - Jan 2017",
     responsibilities: [
       "Associate in product meeting iterations, understand application requirements and estimate the time, needed for the development, testing and deployment.",
       "Bridge the gap between designers and back-end developers.",
@@ -328,7 +329,7 @@ const allProjectData: ProjectData[] = [
   {
     title:
       "Crypta (Identity linkage management & data repository product), Altasigna",
-    tenure: "Aug 2015 to Jan 2017",
+    tenure: "Aug 2015 - Jan 2017",
     responsibilities: [
       "Co-ordinate with teams on product architecture and design.",
       "Interpret application requirement and communicate with designers for wireframes and plan on UI architecture.",
@@ -343,7 +344,6 @@ const allProjectData: ProjectData[] = [
 ];
 
 const Container = styled.div`
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding-bottom: 20;
   max-width: 1200px;
   margin: 0 auto;
@@ -353,24 +353,42 @@ const HeaderContainer = styled.div`
   position: sticky;
   top: 0;
   left: 0;
-  // width: 100vw;
+  justify-content: center;
   background-color: white;
-  z-index: 10;
-  padding-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0); // Initial box-shadow: none
-  transition: box-shadow 0.3s ease; // Add transition for box-shadow
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0);
+  transition: box-shadow 0.3s ease;
+
+  display: flex;
+  align-items: center;
+  margin-bottom: clamp(10px, 2vw, 20px);
+  padding-top: clamp(10px, 2vw, 20px);
+
+  /* This removes any space gaps between flex items */
+  > * {
+    flex-shrink: 0;
+  }
 
   &.sticky {
-    // Apply styles when sticky is active
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Add box-shadow
+    padding-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 `;
 
 const Header = styled.h1`
-  text-align: center;
-  margin-bottom: 10px;
-  padding: 20px 0 0;
-  color: ${(props) => props.theme.color};
+  margin: 0;
+  padding: 0;
+  color: ${(props) => props.theme.secondary.main};
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.2;
+
+  @media (max-width: 768px) {
+    font-size: clamp(1.3rem, 2.5vw, 2.2rem);
+  }
+
+  @media (max-width: 480px) {
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+  }
 `;
 
 const ProjectCount = styled.p`
@@ -385,7 +403,7 @@ const ContactContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
-  flex-wrap: wrap; // Allow wrapping for smaller screens
+  flex-wrap: wrap;
 `;
 
 const ContactChip = styled.a`
@@ -405,7 +423,7 @@ const ContactChip = styled.a`
   }
 
   svg {
-    margin-right: 5px; // Add space between icon and text
+    margin-right: 5px;
   }
 `;
 
@@ -421,7 +439,7 @@ const SearchInput = styled.input`
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-left: 10px;
-  flex-grow: 1; // Allow input to expand and fill remaining space
+  flex-grow: 1;
 `;
 
 const MasonryGrid = styled.div`
@@ -443,7 +461,7 @@ const ScrollToTopButton = styled.button`
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: ${(props) => props.theme.secondary.blue};
+  background-color: ${(props) => props.theme.secondary.main};
   color: white;
   padding: 12px 15px;
   border: none;
@@ -554,26 +572,28 @@ const App: React.FC = () => {
           currentDate.getDate()
         );
       } else {
-        // This shouldn't happen, but handle it just in case
         return filtered;
       }
 
       filtered = filtered.filter((project) => {
         // Extract start and end years from tenure
         const [startDate, endDate] = project.tenure
-          .split(" – ")
+          .split(" - ")
           .map((dateStr) => {
-            const [month, year] = dateStr.trim().split(" ");
-            return new Date(
-              parseInt(year, 10),
-              new Date(`${month} 1`).getMonth(),
-              1
-            );
+            if (dateStr.includes("Present")) {
+              return new Date();
+            } else {
+              const [month, year] = dateStr.trim().split(" ");
+              return new Date(
+                parseInt(year, 10),
+                new Date(`${month} 1`).getMonth(),
+                1
+              );
+            }
           });
-
         if (sortBy === "olderThan2Years") {
           // For "olderThan2Years", check if the end date is older than 2 years
-          return endDate && endDate < filterDate;
+          return endDate < filterDate;
         } else {
           // For other options, check if either start or end date is within the filter range
           return startDate >= filterDate || (endDate && endDate >= filterDate);
@@ -593,13 +613,13 @@ const App: React.FC = () => {
 
   return (
     <Theme>
-      {/* Wrap around the content to capture */}
       <Container>
-        <ComingSoon message="Stay Tuned! New Site Launching Soon..." />
+        <ComingSoon message="Stay Tuned! Updates Launching Soon..." />
         <div ref={inputRef}>
           {/* <HeaderContainer className={isSticky ? "sticky" : ""}> */}
           <HeaderContainer>
-            <Header>Sindhuja Govindarajan</Header>
+            <SvgSiteLogo />
+            <Header>indhuja Govindarajan</Header>
           </HeaderContainer>
           <ContactContainer>
             <ContactChip>
