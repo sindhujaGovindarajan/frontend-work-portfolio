@@ -1,11 +1,22 @@
 {
   "name": "react-typescript",
   "version": "1.0.0",
-  "description": "React and TypeScript example starter project",
+  "description": "Portfolio - FED Sindhu",
   "keywords": [
     "typescript",
     "react",
-    "starter"
+    "redux",
+    "HTMl CSS",
+    "Material UI",
+    "Sindhuja Govindarajan",
+    "Frontend Developer",
+    "Web Developer",
+    "React Developer",
+    "Web Development",
+    "Remote work",
+    "Toronto",
+    "Canada",
+    "Freelance"
   ],
   "main": "src/index.tsx",
   "dependencies": {
