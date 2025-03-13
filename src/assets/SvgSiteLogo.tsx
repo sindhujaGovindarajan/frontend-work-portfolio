@@ -28,32 +28,32 @@ const SiteLogo = (props: SvgSiteLogoProps) => (
 const SvgSiteLogo = styled(SiteLogo)`
   height: clamp(40px, 6vw, 60px);
   width: auto;
-  margin-right: 8px;
-  margin-bottom: 8px;
+  margin-right: 7px;
+  margin-bottom: 7px;
   display: block;
 
   @media (max-width: 1200px) {
     height: 50px;
-    margin-right: 7px;
-    margin-bottom: 7px;
-  }
-
-  @media (max-width: 768px) {
-    height: 45px;
     margin-right: 6px;
     margin-bottom: 6px;
   }
 
-  @media (max-width: 576px) {
-    height: 40px;
+  @media (max-width: 768px) {
+    height: 45px;
     margin-right: 5px;
     margin-bottom: 5px;
   }
 
-  @media (max-width: 320px) {
-    height: 35px;
+  @media (max-width: 576px) {
+    height: 40px;
     margin-right: 4px;
     margin-bottom: 4px;
+  }
+
+  @media (max-width: 320px) {
+    height: 35px;
+    margin-right: 3px;
+    margin-bottom: 3px;
   }
 `;
 export default SvgSiteLogo;

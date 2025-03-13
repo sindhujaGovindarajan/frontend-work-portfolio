@@ -29,14 +29,18 @@ const lightTheme = {
   chipHover: "",
   primary: {
     main: "#31D93C",
+    "20%": "#5AC163",
+    "40%": "#83E88A",
+    "60%": "#ADF0B1",
+    "80%": "#D6F7D8",
     light: "#31D93C55",
     lighter: "#31D93C88",
     lightest: "#31D93C99",
   },
   secondary: { main: "#5831D9", bitLight: "#5831D999", light: "#5831D933" },
 };
-lightTheme.chipBackground = lightTheme.primary.light;
-lightTheme.chipHover = lightTheme.primary.lighter;
+lightTheme.chipBackground = lightTheme.primary["40%"];
+lightTheme.chipHover = lightTheme.primary["20%"];
 
 const darkTheme = {
   background: "#333",
