@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
+interface ComingSoonProps {
+  message: string;
+}
+
 const ComingSoonContainer = styled.div`
   /* Desktop positioning (default) */
   position: absolute;
@@ -31,10 +35,6 @@ const ComingSoonContainer = styled.div`
     font-size: 0.8rem;
   }
 `;
-
-interface ComingSoonProps {
-  message: string;
-}
 
 const ComingSoon: React.FC<ComingSoonProps> = ({ message }) => {
   return <ComingSoonContainer>{message}</ComingSoonContainer>;

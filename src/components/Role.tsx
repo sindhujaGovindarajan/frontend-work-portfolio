@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
+interface RoleProps {
+  title: string;
+}
+
 const RoleText = styled.h1`
   margin: 0;
   margin-bottom: clamp(12px, 2vw, 24px);
@@ -20,10 +24,6 @@ const RoleText = styled.h1`
     margin-bottom: clamp(6px, 1vw, 12px);
   }
 `;
-
-interface RoleProps {
-  title: string;
-}
 
 const Role: React.FC<RoleProps> = ({ title }) => {
   return <RoleText>{title}</RoleText>;
